@@ -1,0 +1,129 @@
+Oberon Games Documentation
+
+
+Tron
+
+Tron.Mod 
+Compile Games.Mod with the NOP2-Compiler 
+Start Tron with a Games.Tron a ~
+a (1 - 10) speed of the game. 
+
+During the game, the following keys are availiable:
+
+
+Player One:
+a ... turn left
+s ... turn right
+d ... turbo On/Off
+Player Two:
+4 ... turn left
+5 ... turn right
+6 ... turbo on/off
+General keys:
+p ... pause
+q ... quit
+
+Tron.exe (PC only)
+
+Type Tron.exe followed by enter. You'll get the Tron.Mod - file. Follow 
+the steps above.
+
+
+
+
+Minesweeper
+Minesweeper.Mod 
+Don't forget to download Lines.Mod too 
+Compile Lines.Mod with the NOP2-Compiler 
+Compile Minesweeper.Mod with the NOP2-Compiler 
+Start Minesweeper with Minesweeper.Start a b c ~
+a Level (1-100); b Row/Collumns of area; c Number of bombs in area. 
+
+During the game, the following keys are availiable:
+
+
+8 ... up
+2 ... down
+4 ... left
+6 ... right
+5 ... mark bomb (where you think one is)
+Space ... open field
+q ... quit
+
+Mines.exe (PC only)
+
+Type Mines.exe followed by enter. You'll get Mines.Mod and Lines.Mod. 
+Follow the steps above.
+
+
+
+
+Pacman
+PacMan.Mod
+Don't forget to download Grafik.Mod 
+Compile Grafik.Mod 
+Compile PacMan.Mod 
+Start Pacman with PacMan.Spielen~ 
+
+During the game, use the following keys:
+
+
+8 ... up
+2 ... down
+4 ... left
+6 ... right
+q ... quit
+
+Pacman.exe (PC only)
+
+Type pacman.exe followed by enter. You'll get pacman.mod and grafik.mod. 
+Follow the steps above
+
+
+
+
+Vier gewinnt
+Vier.Mod
+Don't forget to download Ausgabe.Mod 
+Compile Ausgabe.Mod 
+Compile Vier.Mod 
+Start Vier gewinnt with Vier.HitMe a~
+a Points to quit the program 
+
+During the game, the following keys are availiable:
+
+
+Player One:
+q ... move left
+w ... move right
+a ... mark field
+Player Two:
+o ... move left
+p ... move right
+l ... mark field
+General keys:
+h ... abort
+
+Vier.exe
+
+Type vier.exe followed by enter. You'll get vier.mod and ausgabe.mod. 
+Follow the steps above.
+
+
+
+
+Tetris
+Tetris.Mod
+Don't forget to download Linie.Mod and Ziffer.Mod 
+Compile Linie.Mod 
+Compile Ziffer.Mod 
+Change the keys in the sourcecode. 
+Start Tetris with Tetris.Start a~
+a 1 or 2 for One or Two-Player-Modus 
+
+During the game the following keys are availiable:
+
+
+General keys:
+p...Pause
+
