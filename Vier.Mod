@@ -951,6 +951,8 @@ BEGIN
 
 	In.Int(outof);
 
+	X.Open;  (* polpo: the plane was not opened; nothing was seen and the keys went nowhere *)
+
 
 	O.String("Vier gewinnt for Oberon V1.0 by Michael Klein aka duke...");	O.Ln;	O.Ln;
 
