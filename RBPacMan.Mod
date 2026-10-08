@@ -1,4 +1,4 @@
-MODULE PacMan;
+MODULE RBPacMan;
 
 (* (C) Copyright 1996 by Roland Brand, Aarau *)
 
@@ -551,4 +551,4 @@ BEGIN
 	SpielStart;
 END Spielen;
 
-END PacMan.E:
+END RBPacMan.E:
