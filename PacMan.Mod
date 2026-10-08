@@ -2,7 +2,7 @@ MODULE PacMan;
 
 (* (C) Copyright 1996 by Roland Brand, Aarau *)
 
-IMPORT XYplane := XYtop,Out,Grafik,RandomNumbers;
+IMPORT XYplane := XYtop,Out,Grafik,RandomNumbers,Oberon;
 
 TYPE figur=RECORD
 			PosX,PosY,Richtung,Blick:INTEGER;
@@ -14,6 +14,7 @@ CONST stop=0;
 			hoch=3;
 			runter=4;
 			Bremse=100;
+			Schritt=15;  (* polpo: Millisekunden fuer einen Pixel der Bewegung, nach der Uhr (Bremse war eine Zaehlschleife) *)
 
 VAR Feld:ARRAY 39,25 OF INTEGER;
 	pcman,geistli,punkt,linie,kreuzung,ecke:Grafik.sprite;
@@ -441,6 +442,7 @@ PROCEDURE Bewegen(VAR erwischt:BOOLEAN);
 VAR ax,ay,bx,by,richtung:ARRAY 5 OF INTEGER;
 	i,j:INTEGER;
 	alt:ARRAY 5 OF figur;
+	t:LONGINT;
 BEGIN
 	alt[0]:=pcm;
 	ax[0]:=10+pcm.PosX*10;
@@ -470,6 +472,7 @@ BEGIN
 		richtung[i]:=geist[i-1].Richtung;
 	END;
 	FOR j:=0 TO 9 DO
+		t:=Oberon.Time();
 		FOR i:=0 TO 4 DO
 			bx[i]:=ax[i];
 			by[i]:=ay[i];
@@ -493,6 +496,7 @@ BEGIN
 			ax[i]:=bx[i];
 			ay[i]:=by[i];
 		END;
+		REPEAT UNTIL Oberon.Time()-t >= Schritt
 	END;
 END Bewegen;
 
