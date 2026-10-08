@@ -17,13 +17,10 @@ CONST
 	pause="p";
 	endepause=" ";
 
-(* Werte fuer Verzoegerung:
+(* Verzoegerung: Millisekunden fuer eine Zeile auf Level 1 (polpo: nach der Uhr, Oberon.Time;
+	frueher Durchlaeufe der Spielschleife: Pentium 100, 1 Spieler 25000, 2 Spieler 20000) *)
 
-		Pentium 100: 1 Spieler Modus 25000
-		Pentium 100: 2 Spieler Modus 20000
-*)
-
-	Verzoegerung=2000;
+	Verzoegerung=800;
 
 (* Steuerung Spieler 1: *)
 
@@ -818,9 +815,11 @@ END Strafen2;
 
 PROCEDURE Spiel;
 
-VAR i,j,k,Zaehler: INTEGER; key: CHAR; hilfe1,hilfe2: BOOLEAN;next,altnext,OrtX, OrtY: INTEGER;
+VAR i,j,k: INTEGER; key: CHAR; hilfe1,hilfe2: BOOLEAN;next,altnext,OrtX, OrtY: INTEGER;
+	t, naechste1, naechste2: LONGINT;  (* jetzt, und wann die Teile wieder fallen (Oberon.Time) *)
 
 BEGIN;
+	naechste1:=Oberon.Time(); naechste2:=naechste1;
 	WHILE ~Spielende DO
 	IF y1=0 THEN 
 		IF y2=0 THEN
@@ -846,8 +845,11 @@ BEGIN;
 		Ziffer.Zeichne(8,Punkte2,23,-1); END;
 	WHILE (y1>0) & (y2>0) DO;
 		IF ~Spieler2 THEN  y2:=7; END;
-		INC(Zaehler);
+		t:=Oberon.Time();
 		key:=X.Key(); 
+		(* polpo: die Pfeiltasten fuer Spieler 1 *)
+		IF key=0C4X THEN key:=links1 ELSIF key=0C3X THEN key:=rechts1
+		ELSIF key=0C2X THEN key:=runter1 ELSIF key=0C1X THEN key:=drehunglinks1 END;
 		(* IF wechsel THEN key:=altkey; END; *);
 		IF key=links1 THEN
 			LoescheTeil(a1,lage1,x1,y1);
@@ -879,15 +881,15 @@ BEGIN;
 				IF hilfe2 & DrehungRechts(a2,lage2,x2,y2) THEN DEC(lage2); IF lage2<1 THEN lage2:=4 END; END; END;
 		END;
 		IF key=ende THEN Spielende:=TRUE; END;
-		IF key=runter1 THEN 
+		IF key=runter1 THEN naechste1:=t;
 			IF tempo1=8(*Verzoegerung DIV level1*) THEN tempo1:=1 
 				ELSE tempo1:=8(*Verzoegerung DIV level1*); Punkte1:=Punkte1 + level1*y1; END;
 		END;
-		IF Spieler2 THEN IF key=runter2 THEN 
+		IF Spieler2 THEN IF key=runter2 THEN naechste2:=t;
 			IF tempo2=8(*Verzoegerung DIV level2*) THEN tempo2:=1 
 				ELSE tempo2:=8(*Verzoegerung DIV level2*); Punkte2:=Punkte2 + level2*y2;END;
 		END; END;
-		IF Zaehler MOD (Verzoegerung DIV level1 DIV tempo1) = 0 THEN
+		IF t-naechste1 >= 0 THEN naechste1:=t+Verzoegerung DIV level1 DIV tempo1;
 			KontrolleUnten(a1,lage1,x1,y1);
 			ZeichneTeil(a1,lage1,x1,y1);
 			Malen1;
@@ -898,7 +900,7 @@ BEGIN;
 			IF fertig1 THEN y1:=0 ELSE DEC(y1); END;
 		END;
 		IF Spieler2 THEN
-		IF Zaehler MOD (Verzoegerung DIV level2 DIV tempo2) = 0 THEN
+		IF t-naechste2 >= 0 THEN naechste2:=t+Verzoegerung DIV level2 DIV tempo2;
 			KontrolleUnten(a2,lage2,x2,y2);
 			ZeichneTeil(a2,lage2,x2,y2);
 			Malen2;
@@ -920,7 +922,6 @@ BEGIN;
 		IF key=pause THEN
 			REPEAT key:=X.Key() UNTIL key=endepause;
 		END;
-		IF Zaehler=Verzoegerung THEN Zaehler:=0; END;
 	END;
 END;
 END Spiel;
