@@ -2,7 +2,7 @@ MODULE Ausgabe;
 
 
 
-	IMPORT Out, XYplane;
+	IMPORT Out, XYplane := XYtop;
 
 
 

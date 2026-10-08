@@ -1,7 +1,7 @@
 MODULE Grafik;
 (*enthƒlt verschiedene Grafik-Befehle*)
 
-IMPORT XYplane,Out;
+IMPORT XYplane := XYtop,Out;
 
 TYPE sprite*=ARRAY 10,10 OF BOOLEAN;
 

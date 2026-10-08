@@ -1,6 +1,6 @@
 MODULE Games;
 
-IMPORT In,X:=XYplane;
+IMPORT In,X:=XYtop;
 
 (* Programmiert von Peter Brantschen, Version 1.00, 21. April 1996      
  Neue Features: - Tastatursteuerung nur noch links und rechts            

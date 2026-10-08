@@ -5,7 +5,7 @@ MODULE Tetris;
 (* Neuerungen: Spielparameter sind ueber Konstantendeklariert, Zweispielermodus 
 	bricht bei Limit-Linien ab, Pause-Funktion wurde eingefuehrt *)
 
-IMPORT X:=XYplane, L:=Linie, In, Out, RN:=RandomNumbers, Ziffer, Oberon;
+IMPORT X:=XYtop, L:=Linie, In, Out, RN:=RandomNumbers, Ziffer, Oberon;
 
 CONST 
 

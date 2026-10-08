@@ -1,6 +1,6 @@
 MODULE Ziffer;
 
-IMPORT X:=XYplane, L:=Linie, In, Out, RN:=RandomNumbers;
+IMPORT X:=XYtop, L:=Linie, In, Out, RN:=RandomNumbers;
 
 PROCEDURE Loesche*(x,y: INTEGER);
 

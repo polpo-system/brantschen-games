@@ -2,7 +2,7 @@ MODULE PacMan;
 
 (* (C) Copyright 1996 by Roland Brand, Aarau *)
 
-IMPORT XYplane,Out,Grafik,RandomNumbers;
+IMPORT XYplane := XYtop,Out,Grafik,RandomNumbers;
 
 TYPE figur=RECORD
 			PosX,PosY,Richtung,Blick:INTEGER;

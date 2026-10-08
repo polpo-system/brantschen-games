@@ -1,6 +1,6 @@
 MODULE Linie;
 
-IMPORT XYplane,In;
+IMPORT XYplane := XYtop,In;
 
 VAR abbruch: BOOLEAN; 
 Zaehler,Wert1, Wert2, Wert3, Wert4,Wert5, Wert6, Wert7, Wert8,Ende: INTEGER;

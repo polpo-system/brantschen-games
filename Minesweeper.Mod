@@ -1,6 +1,6 @@
 MODULE Minesweeper;
 
-IMPORT X:=XYplane, L:=Linie, In, Out, RN:=RandomNumbers;
+IMPORT X:=XYtop, L:=Linie, In, Out, RN:=RandomNumbers;
 
 VAR
 	Feld: ARRAY 41, 41 OF INTEGER;
