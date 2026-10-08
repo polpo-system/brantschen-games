@@ -9,7 +9,7 @@ IMPORT XYplane;
 
 CONST
 	erase* = XYplane.erase; draw* = XYplane.draw;
-	Rows = 400;  (* the games draw below y = 400 *)
+	Rows = 450;  (* the games draw below y = 450 (PacMan its score at 420) *)
 
 VAR
 	W*, H*: INTEGER;  (** the size of the plane the games see *)
