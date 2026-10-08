@@ -126,7 +126,9 @@ Spieler1, Spieler2, Runde, Tempo1, Tempo2,langsam,schnell: INTEGER;
 t, naechste1, naechste2: LONGINT; zug1, zug2: BOOLEAN;  (* polpo: wann die Spieler wieder ziehen (Oberon.Time) *)
 
 BEGIN;
-X.Open;
+X.Rows(350); X.Open;
+X.Help("player 1: a s turn  d turbo      player 2: 4 5 turn  6 turbo");
+X.Help("space starts the next round, p pause (space goes on), q quit"); X.Help("Ctrl+Alt+C or Ctrl+Pause stops the game at once");
 Spieler1:=0; Spieler2:=0; Runde:=0; Ende:=FALSE; 
 SiegeSpieler1:=0; SiegeSpieler2:=0;
 In.Open;

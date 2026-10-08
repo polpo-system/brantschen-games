@@ -44,7 +44,8 @@ PROCEDURE MaleFeld;
 VAR i,j: INTEGER;
 
 BEGIN
-	X.Open;
+	X.Rows(60 + 10 * Feldgroesse); X.Open;
+	X.Help("8 2 4 6 move   5 mark a bomb   space open the field"); X.Help("q quit"); X.Help("Ctrl+Alt+C or Ctrl+Pause stops the game at once");
 	Signatur;
 	Schritte:=0;
 	FOR i:=1 TO Feldgroesse DO; FOR j:=1 TO Feldgroesse DO; Feld[i,j]:=0; END; END;

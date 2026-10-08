@@ -57,7 +57,9 @@ CONST Bildschirmbreite=800; Bildschirmhoehe=600;
 VAR x,y,i: INTEGER;
 
 BEGIN;
-	X.Open; 
+	X.Rows(260); X.Open;
+	X.Help("player 1: arrows, or y x move  - drop  . , turn"); X.Help("player 2: 4 6 move  5 drop  9 7 turn");
+	X.Help("p pause, space go on; q quit when the piece is down"); X.Help("Ctrl+Alt+C or Ctrl+Pause stops the game at once");
 	L.Linie(50,50,150,50); L.Linie(50,30,50,250); L.Linie(150,30,150,250);
 	L.Linie(50,30,150,30); L.Linie(50,40,150,40);
 	L.Linie(180,180,180,220); L.Linie(180,220,220,220);L.Linie(220,220,220,180); L.Linie(220,180,180,180);

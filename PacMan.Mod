@@ -542,7 +542,9 @@ END SpielStart;
 
 PROCEDURE Spielen*;
 BEGIN
-	XYplane.Open;
+	XYplane.Rows(440); XYplane.Open;
+	XYplane.Help("arrows, or 4 6 8 2 move   space stop   q quit"); XYplane.Help("a key starts the game");
+	XYplane.Help("Ctrl+Alt+C or Ctrl+Pause stops the game at once");
 	Level1;
 	SpielStart;
 END Spielen;

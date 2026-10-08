@@ -951,7 +951,9 @@ BEGIN
 
 	In.Int(outof);
 
-	X.Open;  (* polpo: the plane was not opened; nothing was seen and the keys went nowhere *)
+	X.Rows(300); X.Open;  (* polpo: the plane was not opened; nothing was seen and the keys went nowhere *)
+	X.Help("player 1: q w move  a drop      player 2: o p move  l drop");
+	X.Help("h ends the game, space starts the next one"); X.Help("Ctrl+Alt+C or Ctrl+Pause stops the game at once");
 
 
 	O.String("Vier gewinnt for Oberon V1.0 by Michael Klein aka duke...");	O.Ln;	O.Ln;
