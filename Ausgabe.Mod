@@ -50,7 +50,7 @@ MODULE Ausgabe;
 
 	BEGIN
 
-		L := XYplane.X; B := XYplane.Y; R := XYplane.X + XYplane.W; T := XYplane.Y + XYplane.H;
+		L := 0; B := 0; R := XYplane.W; T := XYplane.H;  (* the plane starts at 0, 0; Oberon V4's XYplane had X, Y *)
 
 		IF X0 < X1 THEN Xmin := X0; Xmax := X1 ELSE Xmin := X1; Xmax := X0 END;
 
