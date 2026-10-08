@@ -5,10 +5,10 @@ of ETH Oberon, made to run on [polpo](https://github.com/polpo-system/polpo):
 
 | command | game | author |
 | --- | --- | --- |
-| `Tetris.Start 1` (2: two players) | Tetris | Peter Brantschen, 1996 |
+| `PBTetris.Start 1` (2: two players) | Tetris | Peter Brantschen, 1996 |
 | `Minesweeper.Start 13546 10 18` (seed, size 3-40, bombs) | Minesweeper | Peter Brantschen |
-| `Games.Tron 5` (speed 1-10) | Tron, for two players | Peter Brantschen, 1996 |
-| `PacMan.Spielen` | PacMan | Roland Brand, Aarau, 1996 (with `Grafik`) |
+| `PBGames.Tron 5` (speed 1-10) | Tron, for two players | Peter Brantschen, 1996 |
+| `RBPacMan.Spielen` | PacMan | Roland Brand, Aarau, 1996 (with `Grafik`) |
 | `Vier.HitMe 3` (games to win) | Vier gewinnt (Connect Four), for two players | Michael Klein (duke), 1996 (with `Ausgabe`) |
 
 `Linie` and `Ziffer` (lines and digits on the XY plane) are Brantschen's; `Linie2.Mod` is his other
@@ -30,7 +30,11 @@ seen, each in its own commit:
 - Tetris, Tron and PacMan timed by the clock (`Oberon.Time`) instead of by turns of a loop, which
   are far too fast today;
 - Vier gewinnt opens the XY plane (it did not), and `Ausgabe` clips to the plane from 0, 0;
-- the arrow keys in Tetris and PacMan.
+- the arrow keys in Tetris and PacMan;
+- three modules renamed, so that they can be installed next to other packages: `Games` (only Tron)
+  is `PBGames`, `Tetris` is `PBTetris` (Native Oberon has its own Tetris), `PacMan` is `RBPacMan`
+  (after Roland Brand; the PacMan of ETH Oberon is another package). `games-doc.txt` has the old
+  names.
 
 ## Building
 
@@ -38,7 +42,7 @@ With portia: `portia.Install brantschen-games`. By hand, in this directory (obje
 
 ```
 mkdir -p obj/x86
-for m in XYtop Linie Ziffer Ausgabe Games Grafik Minesweeper PacMan Tetris Vier; do
+for m in XYtop Linie Ziffer Ausgabe PBGames Grafik Minesweeper RBPacMan PBTetris Vier; do
   ../polpo/bin/x86/loksh compiler.Compile /s $m.Mod
 done
 ../polpo/bin/x86/loksh System.Init      # then a command of the table, clicked in a viewer
