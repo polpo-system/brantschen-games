@@ -1,4 +1,4 @@
-MODULE Games;
+MODULE PBGames;
 
 IMPORT In,X:=XYtop,Oberon;
 
@@ -25,7 +25,7 @@ Tastatur:
 
 Programmaufruf:
 
-Games.Tron TEMPO
+PBGames.Tron TEMPO
 
 TEMPO ist eine Zahl zwischen 1 und 10
 
@@ -234,4 +234,4 @@ END Tron;
 
 BEGIN;
 
-END Games.
+END PBGames.
