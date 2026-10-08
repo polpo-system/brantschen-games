@@ -507,6 +507,7 @@ BEGIN
 	REPEAT
 		c:=XYplane.Key();
 	UNTIL c#CHR(0);
+	IF c=0C4X THEN c:="4" ELSIF c=0C3X THEN c:="6" ELSIF c=0C1X THEN c:="8" ELSIF c=0C2X THEN c:="2" END;  (* polpo: arrows *)
 	IF c="4" THEN pcm.Richtung:=links;
 	ELSIF c="6" THEN pcm.Richtung:=rechts;
 	ELSIF c="8" THEN pcm.Richtung:=hoch;
@@ -528,6 +529,7 @@ BEGIN
 			Grafik.Schreiben('!YOU WIN!',9,160,290);
 		END;
 		c:=XYplane.Key();
+		IF c=0C4X THEN c:="4" ELSIF c=0C3X THEN c:="6" ELSIF c=0C1X THEN c:="8" ELSIF c=0C2X THEN c:="2" END;  (* polpo: arrows *)
 		IF c="4" THEN pcm.Richtung:=links;
 		ELSIF c="6" THEN pcm.Richtung:=rechts;
 		ELSIF c="8" THEN pcm.Richtung:=hoch;
