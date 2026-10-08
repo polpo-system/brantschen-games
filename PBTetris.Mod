@@ -1,4 +1,4 @@
-MODULE Tetris;
+MODULE PBTetris;
 
 (* Peter Brantschen, 15.April 96 , Version 1.1*)
 (* neuste Version vom 12. Dezember 1996, Version 1.2 *)
@@ -949,5 +949,5 @@ BEGIN
 	Spiel;
 END Start;
 
-END Tetris.
+END PBTetris.
 
