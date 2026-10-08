@@ -1,8 +1,8 @@
 MODULE XYtop;  (** the XY plane of these games, in the rows a viewer shows, with their keys under them *)
 
 (* The games were drawn for a screen of 800 x 600, near y = 0. The XYplane of ETH Oberon is a plane of
-	the size of the screen, and a viewer shows its top rows. XYtop is XYplane with the rows 0 .. H-1 of a
-	game moved to the top H rows of the plane (Rows sets H), so that a viewer of H pixels or more shows
+	the size of the screen, and a viewer shows its top rows. XYtop is XYplane with the rows of a game
+	moved to the top H rows of the plane (Rows, Area set them), so that a viewer of H pixels or more shows
 	them; under them it writes the lines of Help (the keys of the game), in a font of 5 x 7 dots (the
 	misc-fixed 5x7 of X11, public domain). The games import it in place of XYplane (XYplane := XYtop,
 	X := XYtop); XYplane is not changed. *)
@@ -22,7 +22,7 @@ CONST
 
 VAR
 	W*, H*: INTEGER;  (** the size of the plane the games see *)
-	off: INTEGER;  (* their row 0 is row off of XYplane *)
+	off, lo: INTEGER;  (* their row lo is row off of XYplane *)
 	help: ARRAY MaxLines, 80 OF CHAR; lines: INTEGER;
 	font: ARRAY (Last - First + 1) * 7 + 1 OF CHAR; fn: INTEGER;
 
@@ -59,11 +59,17 @@ BEGIN
 	END
 END ShowHelp;
 
-(** the game draws in rows 0 .. n-1 (call before Open); the help goes under them *)
-PROCEDURE Rows*(n: INTEGER);
+(** the game draws in rows low .. high-1 (call before Open); the help goes under them *)
+PROCEDURE Area*(low, high: INTEGER);
 BEGIN
-	H := n; IF H > XYplane.H - MaxLines * LineH - 8 THEN H := XYplane.H - MaxLines * LineH - 8 END;
+	lo := low; H := high - low;
+	IF H > XYplane.H - MaxLines * LineH - 8 THEN H := XYplane.H - MaxLines * LineH - 8 END;
 	off := XYplane.H - H; lines := 0
+END Area;
+
+(** the game draws in rows 0 .. n-1 *)
+PROCEDURE Rows*(n: INTEGER);
+BEGIN Area(0, n)
 END Rows;
 
 (** a line of help under the game: its keys (call after Open; up to 4 lines) *)
@@ -82,11 +88,12 @@ END Clear;
 
 PROCEDURE Dot*(x, y, mode: INTEGER);
 BEGIN
+	DEC(y, lo);
 	IF (y >= 0) & (y < H) THEN XYplane.Dot(x, y + off, mode) END
 END Dot;
 
 PROCEDURE IsDot*(x, y: INTEGER): BOOLEAN;
-BEGIN RETURN (y >= 0) & (y < H) & XYplane.IsDot(x, y + off)
+BEGIN DEC(y, lo); RETURN (y >= 0) & (y < H) & XYplane.IsDot(x, y + off)
 END IsDot;
 
 PROCEDURE Key*(): CHAR;
