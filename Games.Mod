@@ -1,6 +1,6 @@
 MODULE Games;
 
-IMPORT In,X:=XYtop;
+IMPORT In,X:=XYtop,Oberon;
 
 (* Programmiert von Peter Brantschen, Version 1.00, 21. April 1996      
  Neue Features: - Tastatursteuerung nur noch links und rechts            
@@ -123,6 +123,7 @@ x1,y1,xweiter1,yweiter1, Anzahl: INTEGER;
 x2,y2,xweiter2,yweiter2, i: INTEGER;
 imspiel1, imspiel2, pause, Ende: BOOLEAN;
 Spieler1, Spieler2, Runde, Tempo1, Tempo2,langsam,schnell: INTEGER;
+t, naechste1, naechste2: LONGINT; zug1, zug2: BOOLEAN;  (* polpo: wann die Spieler wieder ziehen (Oberon.Time) *)
 
 BEGIN;
 X.Open;
@@ -132,8 +133,8 @@ In.Open;
 In.Int(i);
 IF i<1 THEN i:=1 END;
 IF i>10 THEN i:=10 END;
-langsam:=1000 DIV i;
-schnell:=600 DIV i;
+langsam:=100 DIV i;  (* polpo: Millisekunden fuer einen Schritt; frueher Durchlaeufe der Schleife, 1000 DIV i *)
+schnell:=60 DIV i;
 weiter:=TRUE;
 WHILE Runde<Limit DO;
 	WHILE ~weiter DO;
@@ -154,6 +155,7 @@ WHILE Runde<Limit DO;
 	Signatur;
 	Zwischenstand;
 	Logo;
+	naechste1:=Oberon.Time(); naechste2:=naechste1;
 	WHILE ~abbruch DO;
 		pause:=FALSE;
 		key:=X.Key();
@@ -187,17 +189,20 @@ WHILE Runde<Limit DO;
 		IF key="6" THEN 
 			IF Tempo2=schnell THEN Tempo2:=langsam ELSE Tempo2 := schnell; END;
 		END;
-		IF (Anzahl MOD Tempo1) = 0 THEN Linie(x1,x1,y1,1); END;
-		IF (Anzahl MOD Tempo2) = 0 THEN Linie(x2,x2,y2,1); END;
-		IF (Anzahl MOD Tempo2) = 0 THEN INC(x2,xweiter2); INC(y2,yweiter2); END;
-		IF (Anzahl MOD Tempo1) = 0 THEN INC(x1,xweiter1); INC(y1,yweiter1); END;
-		IF (Anzahl MOD Tempo1) = 0 THEN 
+		t:=Oberon.Time();
+		zug1:=t-naechste1 >= 0; IF zug1 THEN naechste1:=t+Tempo1 END;
+		zug2:=t-naechste2 >= 0; IF zug2 THEN naechste2:=t+Tempo2 END;
+		IF zug1 THEN Linie(x1,x1,y1,1); END;
+		IF zug2 THEN Linie(x2,x2,y2,1); END;
+		IF zug2 THEN INC(x2,xweiter2); INC(y2,yweiter2); END;
+		IF zug1 THEN INC(x1,xweiter1); INC(y1,yweiter1); END;
+		IF zug1 THEN 
 			IF X.IsDot(x1,y1) THEN 
 				abbruch:=TRUE;
 				imspiel1:=FALSE;
 			END; 
 		END;
-		IF (Anzahl MOD Tempo2) = 0 THEN 
+		IF zug2 THEN 
 			IF X.IsDot(x2,y2) THEN 
 				abbruch:=TRUE; 
 				imspiel2:=FALSE;
